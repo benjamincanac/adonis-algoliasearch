@@ -1,0 +1,25 @@
+{
+  "name": "adonis-algoliasearch",
+  "version": "0.0.1",
+  "description": "This package is a wrapper on top of [algoliasearch-client-javascript](https://github.com/algolia/algoliasearch-client-javascript).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmty/adonis-algolia.git"
+  },
+  "scripts": {
+    "lint": "standard src/**",
+    "preversion": "npm run lint"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "algoliasearch": "3.30.0"
+  },
+  "devDependencies": {
+    "standard": "12.0.1"
+  },
+  "standard": {
+    "globals": [
+      "use"
+    ]
+  }
+}
