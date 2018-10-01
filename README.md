@@ -14,3 +14,7 @@ Install the package using the `adonis` CLI.
 ```
 
 Follow instructions that are displayed ([or read them here](https://github.com/cmty/adonis-algoliasearch/blob/master/instructions.md)).
+
+## License
+
+[MIT](https://github.com/cmty/adonis-algoliasearch/blob/master/LICENSE.md)
