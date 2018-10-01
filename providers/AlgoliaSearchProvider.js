@@ -18,7 +18,7 @@ class AlgoliaSearchProvider extends ServiceProvider {
       return new AlgoliaSearch(Config)
     })
 
-    this.app.alis('Adonis/Addons/AlgoliaSearch', 'AlgoliaSearch')
+    this.app.alias('Adonis/Addons/AlgoliaSearch', 'AlgoliaSearch')
   }
 }
 
