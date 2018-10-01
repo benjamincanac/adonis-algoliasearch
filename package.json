@@ -1,6 +1,6 @@
 {
   "name": "adonis-algoliasearch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "This package is a wrapper on top of [algoliasearch-client-javascript](https://github.com/algolia/algoliasearch-client-javascript).",
   "repository": {
     "type": "git",
