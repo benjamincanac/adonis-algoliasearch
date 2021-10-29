@@ -1,0 +1,49 @@
+name: deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [14]
+
+    steps:
+      - name: Setup node env
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache node_modules
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn
+
+      - name: Install @docus/admin module
+        run: yarn add --dev @docus/admin
+
+      - name: Generate
+        env:
+          NITRO_PRESET: cloudflare
+        run: yarn build
+
+      - name: Deploy
+        env:
+          DOCUS_API_URL: ${{ secrets.DOCUS_API_URL }}
+          DOCUS_DEPLOY_TOKEN: ${{ secrets.DOCUS_DEPLOY_TOKEN }}
+        run: |
+          tar czf archive.tgz .output
+          curl -X POST -F "archive.tgz=@archive.tgz" -f "$DOCUS_API_URL/workers/deploy?token=$DOCUS_DEPLOY_TOKEN"
